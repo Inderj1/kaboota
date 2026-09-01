@@ -65,7 +65,8 @@ export function AnimatedGlobe() {
       const w = rect.width, h = rect.height;
       ctx.clearRect(0, 0, w, h);
       const cx = w / 2, cy = h / 2;
-      const R = Math.min(w, h) * 0.46;
+      // radius from the narrower axis, with the canvas taller than wide so pulses/glyphs never clip top or bottom
+      const R = Math.min(w, h / 1.12) * 0.45;
       const spin = time * 0.22;
       const tilt = 0.38;
       const project = (p: V) => {
@@ -116,7 +117,7 @@ export function AnimatedGlobe() {
         for (let k = 0; k <= steps; k++) {
           const t = k / steps;
           const v = slerp(a, hubV, t);
-          const lift = 1 + 0.28 * Math.sin(t * Math.PI);
+          const lift = 1 + 0.05 * Math.sin(t * Math.PI);
           const p = project({ x: v.x * lift, y: v.y * lift, z: v.z * lift });
           if (p.z < -0.05) { drawing = false; continue; }
           if (!drawing) { ctx.moveTo(p.sx, p.sy); drawing = true; } else ctx.lineTo(p.sx, p.sy);
@@ -127,7 +128,7 @@ export function AnimatedGlobe() {
         // a packet travelling along the arc
         const tt = (time * 0.35 + i / NODES.length) % 1;
         const pv = slerp(a, hubV, tt);
-        const lift = 1 + 0.28 * Math.sin(tt * Math.PI);
+        const lift = 1 + 0.05 * Math.sin(tt * Math.PI);
         const pp = project({ x: pv.x * lift, y: pv.y * lift, z: pv.z * lift });
         if (pp.z > -0.05) {
           ctx.setLineDash([]);

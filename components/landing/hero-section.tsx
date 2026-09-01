@@ -31,8 +31,8 @@ export function HeroSection() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-10 pb-6 lg:pt-12 lg:pb-8 w-full">
-        <div className="grid lg:grid-cols-[.95fr_1.05fr] gap-10 lg:gap-6 items-center">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-6 pb-4 lg:pt-8 lg:pb-6 w-full">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-6 items-center">
           {/* Left: copy */}
           <div>
             <div
@@ -91,7 +91,7 @@ export function HeroSection() {
 
           {/* Right: call-centre globe — channels pulsing on the surface, arcs routing to one pipeline */}
           <div
-            className={`relative mx-auto w-full max-w-[520px] aspect-square lg:max-w-[640px] transition-all duration-1000 delay-300 ${
+            className={`relative mx-auto lg:mx-0 lg:ml-auto w-full max-w-[500px] aspect-[100/112] lg:max-w-[580px] transition-all duration-1000 delay-300 ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
           >
@@ -102,7 +102,7 @@ export function HeroSection() {
 
       {/* Revenue board strip — one week at a mechanical-services pilot, always fully in view */}
       <div
-        className={`relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full pb-12 transition-all duration-700 delay-500 ${
+        className={`relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 w-full pt-6 lg:pt-8 pb-16 transition-all duration-700 delay-500 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
