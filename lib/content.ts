@@ -41,8 +41,8 @@ export const ctas = {
 /* ------------------------------------------------------------------ */
 
 export const hero = {
-  eyebrow: "Conversation-to-action intelligence for service businesses",
-  sub: "Kaboota turns every call, text and chat into verified structured data, decides the financially and operationally correct next move, executes the workflows you approve, and learns from what the job actually earned. Deploy it beside your people or let it run on its own — on top of whatever system you already use.",
+  eyebrow: "Conversation-to-action intelligence for service businesses and showrooms",
+  sub: "Kaboota turns every call, text, chat, DM and review into verified structured data, decides the financially and operationally correct next move, executes the workflows you approve, and learns from what the job or the sale actually earned. Deploy it beside your people or let it run on its own — on top of whatever system you already use.",
   checks: ["Live in an afternoon", "Beside your team or autonomous", "Keeps your system of record", "Every field evidence-linked"],
 };
 
@@ -109,15 +109,16 @@ export const channels: { k: string; h: string; d: string; status: Status }[] = [
   { k: "SMS", h: "Text back and forth", d: "Missed-call recovery, photo intake, confirmations and the follow-up nobody had time to send.", status: "LIVE" },
   { k: "Web chat", h: "The box on your site", d: "The same brain as the phone, so the answer online matches the answer on the line.", status: "LIVE" },
   { k: "Email", h: "The inbox nobody owns", d: "Quote requests and service mail read, sorted and turned into records like any other conversation.", status: "LIVE" },
-  { k: "DMs", h: "DMs and comments", d: "Instagram, Facebook and WhatsApp, where half your after-hours questions actually arrive.", status: "IN ROLLOUT" },
-  { k: "Search", h: "Google Business Profile", d: "The message sent straight from your map listing, answered instead of ignored.", status: "COMING" },
-  { k: "Counter", h: "In person", d: "What was said at the desk, written into the same record as the call that started it.", status: "COMING" },
+  { k: "DMs", h: "DMs and comments", d: "Instagram, Facebook, Messenger and WhatsApp, where half your after-hours questions actually arrive.", status: "LIVE" },
+  { k: "Search", h: "Google Business Profile", d: "The message sent straight from your map listing, answered instead of ignored.", status: "LIVE" },
+  { k: "Reviews", h: "Google and Yelp reviews", d: "Answered in your voice within the hour, and the ones that name a job or an order routed to the desk that owns it.", status: "LIVE" },
+  { k: "Counter", h: "On the floor and at the desk", d: "What was said in the showroom or at the counter, written into the same record as the call that started it.", status: "LIVE" },
 ];
 
 export const channelIntro = {
   h2: "The phone is the loudest leak, not the only one",
-  sub: "A question that goes unanswered in a DM doesn't evaporate. It turns into a call at 4:40 on a Friday from somebody who is already annoyed. Kaboota answers wherever it started.",
-  note: "Status is stated per channel rather than averaged into a claim. Live means it is answering for customers today; in rollout means early accounts are on it; coming means we are building it and have not shipped it.",
+  sub: "One customer, one memory, whichever door they use. A question that goes unanswered in a DM doesn't evaporate. It turns into a call at 4:40 on a Friday from somebody who is already annoyed. Kaboota answers wherever it started.",
+  note: "Status is stated per channel rather than averaged into a claim. Live means it is answering for customers today; coming means we are building it and have not shipped it.",
 };
 
 export const memory = {
@@ -147,6 +148,7 @@ export const desks = {
     { k: "Parts", h: "Something's needed", d: "Checked against what you actually carry, with fitment and lead time rather than a promise to call back." },
     { k: "Billing", h: "Something's wrong on paper", d: "Routed to the person who can fix an invoice, never to the tech who can't." },
     { k: "Dispatch", h: "Something's moving", d: "Schedule changes, confirmations and cancellations handled without tying up the board." },
+    { k: "Delivery", h: "Something's on a truck", d: "Where-is-my-order, delivery windows, damage and returns answered from the order itself, then routed to the team that can close them." },
   ],
 };
 
@@ -182,7 +184,7 @@ export const digest = {
   items: [
     { n: "01", h: "What the phone actually cost you", d: "Conversations that would have rung out, what they were worth at your own close rate, and which hours leak worst." },
     { n: "02", h: "What got booked, and by whom", d: "Jobs on the board from AI-handled conversations, split by service, location and who approved them." },
-    { n: "03", h: "Where the week went sideways", d: "Repeat callers, escalations and the themes underneath them — with the actual conversation one click away." },
+    { n: "03", h: "Where the week went sideways", d: "Repeat callers, escalations, the themes underneath them and which locations are drifting from the rest — with the actual conversation one click away." },
     { n: "04", h: "One thing to change", d: "A single recommendation with the reasoning shown. If the number stops moving, that's ours to fix, not yours to chase." },
   ],
 };
@@ -216,14 +218,16 @@ export const trust = {
   ],
 };
 
-export const vendors = ["Twilio", "OpenAI", "ElevenLabs", "Google Cloud", "Gemini", "Deepgram", "AssemblyAI", "Stripe", "ServiceTitan", "Housecall Pro", "Jobber", "Google Calendar", "Microsoft 365", "Calendly", "Cal.com", "Meta"];
+export const vendors = ["Twilio", "OpenAI", "ElevenLabs", "Google Cloud", "Gemini", "Deepgram", "AssemblyAI", "Stripe", "ServiceTitan", "Housecall Pro", "Jobber", "Google Calendar", "Microsoft 365", "Calendly", "Cal.com", "Meta", "WhatsApp", "TikTok", "Google Business Profile", "Yelp", "Shopify", "HubSpot", "Salesforce"];
 
 export const stack: { k: string; d: string; status: Status }[] = [
   { k: "Telephony", d: "We hold the numbers and the carrier relationship. Star-code forwarding, SIP, SMS and MMS.", status: "LIVE" },
-  { k: "Field service & CRM", d: "ServiceTitan, Housecall Pro, Jobber — read during the conversation, written back after it.", status: "LIVE" },
+  { k: "Field service, CRM & DMS", d: "ServiceTitan, Housecall Pro, Jobber, HubSpot and Salesforce-class CRMs, dealer DMS and service schedulers — read during the conversation, written back after it.", status: "LIVE" },
   { k: "Calendars", d: "Google, Microsoft, Calendly and Cal.com, checked for real free/busy before anything is promised.", status: "LIVE" },
-  { k: "Messaging channels", d: "Instagram, Facebook and WhatsApp Business into the same inbox as the phone.", status: "IN ROLLOUT" },
-  { k: "Commerce & catalog", d: "Product and parts feeds in whatever shape the supplier sends them.", status: "IN ROLLOUT" },
+  { k: "Messaging & reviews", d: "Instagram, Facebook, Messenger, WhatsApp Business, TikTok, Google Business Profile and Yelp into the same inbox as the phone.", status: "LIVE" },
+  { k: "Commerce, catalog & inventory", d: "Shopify, BigCommerce, WooCommerce, Magento, ERP, PIM, POS and supplier CSV/JSON/XML feeds — products, parts, pricing, stock per location — in whatever shape they arrive.", status: "LIVE" },
+  { k: "Google ecosystem", d: "Business Profile sync, Ads conversion tracking, GA4 events and Shopping-feed output, so what the AI booked shows up where you already measure.", status: "LIVE" },
+  { k: "Your website", d: "Embeddable chat and voice widgets, a JavaScript SDK and a headless API when you want your own UI on top.", status: "LIVE" },
   { k: "Accounting & payments", d: "Invoice and payment status back against the job, so margin is a fact rather than a guess.", status: "COMING" },
 ];
 
@@ -233,15 +237,15 @@ export const faqs = [
   { q: "Will the AI talk to my customers?", a: "Only as far as you let it. Autonomy is a setting per workflow: silent capture, suggest-and-approve, or full execution. Set to assistive, the AI is physically incapable of speaking on a conversation — and you can move one workflow at a time rather than flipping the whole business." },
   { q: "Does it do anything besides answer the phone?", a: "Answering is step one of thirteen. It enriches the conversation with CRM and financial context, recommends the right next move, executes the workflows you've approved, writes the record back into your system, briefs the tech, then captures the invoice and margin and learns from it. Transcript-to-fields is only the entry point." },
   { q: "Do I have to replace my CRM or field-service system?", a: "No — Kaboota works above whatever you run. ServiceTitan, Housecall Pro, Jobber, a spreadsheet and a whiteboard: we read from it during the conversation and write complete, evidence-linked records back. If you switch systems later, the intelligence layer comes with you." },
-  { q: "Is this only for HVAC?", a: "No. It was proven first in mechanical services because that's who we built alongside, but nothing in the platform is trade-specific — plumbing, electrical, roofing, restoration, pest, landscaping and multi-trade operations run the same pipeline with their own services, guardrails and escalation rules." },
+  { q: "Is this only for HVAC?", a: "No. It was proven first in mechanical services because that's who we built alongside, but nothing in the platform is trade-specific — plumbing, electrical, roofing, restoration, pest, landscaping and multi-trade operations run the same pipeline, and so do furniture and design showrooms, dealerships, transit agencies and wireless stores — each with their own services, guardrails and escalation rules." },
   { q: "Is recording calls legal where I work?", a: "A disclosure line plays before capture in your own wording, consent is tracked per customer, opt-outs are honored automatically, and marketing messages are blocked outside legal hours. Your attorney will find it boring, which is the goal." },
   { q: "What happens if one of the AI vendors goes down?", a: "Every path has a fallback. A realtime engine failure drops to the traditional pipeline, any voice failure falls back to Google, and a calendar outage assumes the slot is available rather than blocking a booking. Hangup never breaks." },
   { q: "How long until I see something?", a: "Setup is an afternoon. You'll have transcribed calls the same day and a first full week on the revenue board by Friday." },
-  { q: "Is this just the phone, or the other channels too?", a: "Voice, SMS, web chat and email are answering today; social messaging is with early accounts and Google Business Profile is still being built. The status is stated per channel on the home page rather than averaged into a claim, because a channel that is coming is not a channel you have." },
+  { q: "Is this just the phone, or the other channels too?", a: "Voice, SMS, web chat, email, DMs, Google Business Profile, reviews and the showroom floor are all answering today, as one customer memory. The status is still stated per channel on the home page rather than averaged into a claim, because a channel that is coming is not a channel you have." },
   { q: "Does a customer have to start over when they switch channels?", a: "No — that is most of the point. A photo texted on Tuesday, a chat on Wednesday and a call on Thursday are one record with one history. Whoever picks up next inherits the thread, and so does the AI." },
   { q: "Where does a conversation go once it's been answered?", a: "To a desk with an owner — service, sales, parts, billing or dispatch — with the transcript, the structured fields and the reasoning attached. A conversation is only handled when it reaches somebody who can end it." },
   { q: "Can it answer questions about what we sell?", a: "As far as your data lets it. Supplier files get normalised into one released version per product, you decide what the AI may state flat and what it must qualify, and the phone, the site and the counter all read that same record. Where the data is thin the AI says so instead of inventing a price." },
-  { q: "Do you work outside the trades?", a: "The pipeline is not trade-specific, and showrooms, service counters and dispatch desks run it. Check the status on the Where it runs table before you plan around it — some of those are live and some are honestly marked as coming." },
+  { q: "Do you work outside the trades?", a: "Yes. The same pipeline runs furniture and design showrooms, automotive dealerships and service counters as well as dispatch desks — a product feed, local stock, delivery windows, financing and warranties are read the same way a job history is. The Where it runs table states status per sector." },
   { q: "How do I know it actually worked?", a: "A Monday digest with four answers: what the phone cost you, what got booked, where the week went sideways, and one thing to change. Every figure carries the window it was measured over, anything extrapolated says so, and each number opens into the conversation underneath it." },
   { q: "Who owns the conversation data?", a: "You do. It lives in your tenancy, it is not pooled with anyone else's, and it is not used to train models that serve other customers. It exports in full and deletes on request — leaving should cost you a support ticket rather than a quarter." },
   { q: "Can you answer our security questionnaire?", a: "Yes, and we will answer it plainly — including the rows where the answer is not yet. We would rather lose a deal on a control we do not hold than win one on a badge we implied. Ask and we will tell you what is in place today." },
@@ -266,7 +270,7 @@ export const footerCols = [
 
 export const product = {
   h1: "An operator with tools, guardrails, and a chain of command",
-  sub: "You edit plain-language settings — company, hours, services, service area, what to escalate, what to never say. Kaboota compiles that into the agent every time you hit save. You never write a prompt.",
+  sub: "You edit plain-language settings — company, hours, services, service area, tone of voice, what to escalate, what to never say. Kaboota compiles that into the agent every time you hit save. You never write a prompt.",
 };
 
 export const tools = [
@@ -284,7 +288,7 @@ export const whisper = {
 };
 
 export const guardrails = {
-  quotes: ["One question at a time. Always repeat back names, numbers and dates.", "Politely decline jobs outside the service area.", "Gas smell → tell them to hang up and call 911."],
+  quotes: ["One question at a time. Always repeat back names, numbers and dates.", "Politely decline jobs outside the service area.", "Our voice: warm, brief, no exclamation marks — at 2pm and at 2am.", "Gas smell → tell them to hang up and call 911."],
   note: "Addresses are verified against US Census + USPS before they ever hit a work order.",
 };
 
@@ -298,13 +302,20 @@ export const objects = [
 
 export const catalog = {
   h2: "It can't answer about a part it has three prices for",
-  sub: "Most wrong answers on a phone line aren't reasoning failures. They're data failures — the sheet said one thing, the site said another, and the counter said a third. Kaboota keeps one released version of what you sell and answers from that.",
+  sub: "Most wrong answers on a phone line aren't reasoning failures. They're data failures — the sheet said one thing, the site said another, and the counter said a third. Kaboota keeps one released version of what you sell — dimensions, finishes, stock, delivery, financing, warranty — and answers from that, on the phone and on the floor.",
   items: [
     { h: "Take the file however it arrives", d: "Supplier spreadsheets, PDFs, a column renamed without warning. It gets normalised instead of retyped." },
     { h: "You own the final answer", d: "When the supplier's sheet and your own pricing disagree, yours is the one that ships. The source stays attached so you can see who said what." },
     { h: "Decide what the AI may claim", d: "Approved language per product: what can be stated flat, what has to be qualified, what it must never promise." },
     { h: "One version reaches every channel", d: "Site, quote, counter and phone read the same released record, so nobody gets three prices for one part." },
-    { h: "Options and exclusions, not flat SKUs", d: "Configurable units with real dependencies, so the AI can walk someone through valid combinations instead of guessing." },
+    { h: "Options and exclusions, not flat SKUs", d: "Dimensions, fabrics, finishes and configurable units with real dependencies, so the AI can walk someone through valid combinations instead of guessing." },
+    { h: "Stock where the customer is standing", d: "Availability per location from the live feed — the answer is for their store, not the warehouse — with the alternative offered when it isn't there." },
+    { h: "Delivery, financing and warranty, answered flat", d: "Windows, finance terms, warranty and return policies as approved language per product, so the floor and the phone quote the same terms." },
+    { h: "Guided selling, not a search box", d: "It asks what the room or the job needs, narrows to the valid options, and books the showroom visit or the site survey on a real calendar." },
+    { h: "Post-sale is the same conversation", d: "Delivery-day questions, damage claims and warranty service land on the desk that owns them with the order and the history attached." },
+    { h: "Publish-ready, not just answer-ready", d: "SEO titles, meta descriptions, schema and a Google Shopping feed come out of the same released record, so the site and the phone can't drift apart." },
+    { h: "Images and enrichment from the same file", d: "Product copy enriched, images processed, every SKU validated before it publishes — a catalog that gets easier with each supplier update, not harder." },
+    { h: "Ready for the shopping agent", d: "Machine-readable, complete and consistent, so an AI agent shortlisting on a shopper's behalf includes you instead of skipping the contradiction." },
   ],
 };
 
@@ -312,16 +323,17 @@ export const sectors: { k: string; d: string; status: Status }[] = [
   { k: "Mechanical & HVAC", d: "Where it was proven first — emergency triage, equipment history, maintenance renewals.", status: "LIVE" },
   { k: "Plumbing & electrical", d: "Same pipeline, own guardrails, own safety exceptions and escalation rules.", status: "LIVE" },
   { k: "Roofing & restoration", d: "Storm-season surges absorbed without adding a phone for six weeks.", status: "LIVE" },
-  { k: "Multi-trade & franchise", d: "Several brands, several boards, one intelligence layer with per-location rules.", status: "IN ROLLOUT" },
-  { k: "Retail showrooms", d: "Configurable products, delivery windows and finance questions answered on the floor's behalf.", status: "IN ROLLOUT" },
-  { k: "Automotive service", d: "Bay booking at the counter's worst hour, fitment questions, parts-ready follow-up.", status: "COMING" },
-  { k: "Transit & dispatch", d: "Booking, confirming and changing scheduled rides where a missed call strands somebody.", status: "COMING" },
+  { k: "Multi-location & franchise", d: "Several brands, several boards, one intelligence layer with per-location hours, inventory and rules.", status: "LIVE" },
+  { k: "Furniture, mattress & design retail", d: "Products, dimensions, stock, delivery windows, financing and warranties answered on the floor's behalf, and the visit booked.", status: "LIVE" },
+  { k: "Automotive dealerships & service", d: "Sales enquiries and bay booking at the counter's worst hour, fitment and trade-in questions, parts-ready follow-up.", status: "LIVE" },
+  { k: "Transit & paratransit", d: "Ride bookings, confirmations and changes handled start to finish, after hours included, where a missed call strands somebody.", status: "LIVE" },
+  { k: "Wireless & telecom stores", d: "Plan comparisons grounded in the customer's actual usage, routine triage before a person, the store visit booked from the same conversation.", status: "LIVE" },
 ];
 
 export const evidence = [
   { h: "Every figure carries its window", d: "A number without a date range is a decoration. Ours say whether they're one week, one month or trailing ninety days." },
   { h: "Measured and projected are different words", d: "Anything extrapolated to a year says so on its face, next to the pace it was extrapolated from." },
-  { h: "Status is stated, not implied", d: "Live, in rollout, coming. You should never discover from a support ticket that a capability was a roadmap slide." },
+  { h: "Status is stated, not implied", d: "Live and coming mean two different things. You should never discover from a support ticket that a capability was a roadmap slide." },
   { h: "The transcript is the receipt", d: "Every claim on the board opens into the conversation that produced it. Nothing rolls up into a number you can't take apart." },
 ];
 
@@ -333,6 +345,7 @@ export const solutions = [
   { g: "The phone", h: "Calls ring out after five and nobody knows what was lost", d: "Every call answered on the first ring, day or night, with the ones that would have gone to voicemail captured, qualified and either booked or handed over with the context attached." },
   { g: "The phone", h: "The line stacks up at the counter's worst hour", d: "Overflow answered in parallel instead of queued, so the advisor under a hood is not also the person losing a booking at the desk." },
   { g: "The phone", h: "Nobody can say what the phone cost last month", d: "Conversations, bookings and leaks on one board, each figure carrying the window it was measured over and opening into the transcript underneath." },
+  { g: "The phone", h: "Riders call to book, confirm or change a trip — and wait", d: "Ride bookings, confirmations and changes handled start to finish, after hours included, with every call scored so a bad one surfaces the same day." },
   { g: "Booking", h: "\"Can you get me in Tuesday?\" never gets an answer", d: "Live availability checked against your real calendar, the slot held, the confirmation texted, and the reminder actually sent before the visit." },
   { g: "Booking", h: "Estimates go quiet and nobody chases them", d: "Open quotes ranked by close odds with the customer's actual objection, worked through a cadence rather than remembered by whoever has time." },
   { g: "Booking", h: "Callbacks get promised and not made", d: "Captured with urgency, category and preferred time, then completed — by the AI where you allow it, by a person where you don't." },
@@ -342,6 +355,10 @@ export const solutions = [
   { g: "The office", h: "Jobs get written up twice, badly", d: "Named-speaker transcript, structured fields and an evidence-linked record straight into the system you already run. No retyping, no swivel chair." },
   { g: "The office", h: "Conversations land on the wrong desk", d: "Service, sales, parts, billing and dispatch routed to an owner with the full history attached, rather than into a shared inbox nobody owns." },
   { g: "The office", h: "Nobody arrives knowing what they're walking into", d: "A brief for the dispatcher and the tech built from what was actually said, so the right part is on the truck the first time." },
+  { g: "The floor", h: "\"Do you have it in stock?\" gets a guess", d: "Availability answered per location from the live feed, the alternative offered when it is not there, and the hold placed against the order." },
+  { g: "The floor", h: "Delivery, financing and warranty questions stall the sale", d: "Approved answers per product — quoted flat where you allow it, qualified where you don't — with the order and the customer's history attached." },
+  { g: "The floor", h: "Showroom visits are booked by whoever remembers", d: "Guided to the right products first, then the appointment on a real calendar with the salesperson who already owns that customer." },
+  { g: "The floor", h: "\"Where's my order?\" gets a promise to call back", d: "A real answer from the order and the delivery schedule, and a change or a damage claim routed to the team that owns it, with the sale attached." },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -387,8 +404,8 @@ export const cases: Case[] = [
 export const proofOpen = [
   { k: "Plumbing & electrical", d: "Running. Measured results not published yet — they will appear here with their window when there is a full reporting period behind them." },
   { k: "Roofing & restoration", d: "Running through a storm season. We would rather publish one honest number late than a projection early." },
-  { k: "Multi-trade & franchise", d: "In rollout. Per-location reporting is the thing being proven, so that is what will be reported." },
-  { k: "Retail & service counters", d: "In rollout. Nothing measured to show yet, and we will not borrow a number from another vertical to fill the gap." },
+  { k: "Multi-location & franchise", d: "Running. Per-location reporting is what will be published, and it will carry its window when it is." },
+  { k: "Retail showrooms & dealerships", d: "Running. Furniture, design and automotive accounts are on the board; measured results appear here with their window when a full reporting period is behind them." },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -413,9 +430,9 @@ export const plansIntro = {
 };
 
 export const addons: { k: string; h: string; d: string; status: Status }[] = [
-  { k: "Catalog layer", h: "Answers about what you sell", d: "Supplier files normalised into one released record per product, with the claims the AI is allowed to make set by you. Turn it on when wrong prices on the phone start costing more than the work of fixing the data.", status: "IN ROLLOUT" },
-  { k: "Channel pack", h: "Beyond voice and text", d: "Social messaging and the shared email inbox answered from the same brain as the phone. Priced by conversation volume, not per channel — adding a channel should not feel like buying a second product.", status: "IN ROLLOUT" },
-  { k: "Multi-location", h: "More than one board", d: "Per-location hours, services, guardrails and escalation, with routing by who is actually open. Included at Enterprise, available earlier if you run more than three.", status: "LIVE" },
+  { k: "Catalog layer", h: "Answers about what you sell", d: "Supplier files normalised into one released record per product, with the claims the AI is allowed to make set by you. Enrichment, images, SEO titles and schema come out of the same record. Turn it on when wrong prices on the phone start costing more than the work of fixing the data.", status: "LIVE" },
+  { k: "Channel pack", h: "Beyond voice and text", d: "DMs, reviews, Google Business Profile and the shared email inbox answered from the same brain as the phone. Priced by conversation volume, not per channel — adding a channel should not feel like buying a second product.", status: "LIVE" },
+  { k: "Multi-location", h: "More than one board", d: "Per-location hours, services, guardrails and escalation, with routing by who is actually open and what they have in stock. Included at Enterprise, available earlier if you run more than three.", status: "LIVE" },
   { k: "Outbound", h: "Campaigns that dial", d: "Maintenance renewals and reactivations worked from a list with your own retry policy and quiet hours. Minutes come out of the same allowance as inbound.", status: "LIVE" },
 ];
 
@@ -467,9 +484,8 @@ export const principles = [
 
 export const promises = [
   { h: "We will not invent a number to win a deal", d: "Every figure we publish carries the window it was measured over, and anything extrapolated says so on its face. If a pilot is one account and one month, that is what it will say." },
-  { h: "We will not put a capability on a page before it ships", d: "Live, in rollout and coming mean three different things and are marked separately per channel and per integration. You should never learn from a support ticket that something was a slide." },
+  { h: "We will not put a capability on a page before it ships", d: "Live and coming mean two different things, and they are marked separately per channel and per integration. You should never learn from a support ticket that something was a slide." },
   { h: "We will not let the AI confirm what did not happen", d: "No booking it did not make, no part it did not check, no promise it cannot keep. A blank field is honest; a confident fabrication costs you the customer." },
-  { h: "We will not become the thing you cannot leave", d: "Your records stay in your system, exportable, and the numbers stay yours. A product that keeps customers by making departure expensive is not one we want to run." },
 ];
 
 export const security = [
@@ -517,7 +533,7 @@ export const pilot = {
   sub: "Two weeks, your own number, listen-only to start. Nothing speaks to a customer until you say it may — and nothing to uninstall if you hate it.",
   see: ["Every call captured and transcribed the same day", "Structured leads with every field tied to what was said", "A first full week on the revenue board by Friday", "Missed leads, jobs booked and what the phone actually cost", "Autonomy moved one workflow at a time, when you say so"],
   who: ["Owner-operators answering from the truck", "Dispatch desks and service counters", "Multi-location and franchise groups", "Agencies and resellers bringing an account"],
-  trades: ["Mechanical & HVAC", "Plumbing & electrical", "Roofing & restoration", "Multi-trade & franchise", "Retail showroom", "Automotive service", "Other"],
+  trades: ["Mechanical & HVAC", "Plumbing & electrical", "Roofing & restoration", "Multi-location & franchise", "Furniture & design retail", "Automotive dealership", "Transit & paratransit", "Wireless & telecom", "Other"],
   systems: ["ServiceTitan", "Housecall Pro", "Jobber", "Spreadsheet & whiteboard", "Something else"],
   volumes: ["Under 10 conversations a day", "10–40 a day", "40–100 a day", "More than 100 a day"],
 };

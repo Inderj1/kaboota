@@ -65,7 +65,7 @@ export function FooterSection() {
           <div className="flex items-center gap-4 font-mono text-[10.5px] text-white/35">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-brand animate-pulse-ring" />
-              LIVE · IN ROLLOUT · COMING — STATED PER CHANNEL
+              LIVE · COMING — STATED PER CHANNEL
             </span>
           </div>
         </div>

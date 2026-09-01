@@ -32,7 +32,7 @@ export function Navigation() {
 
           <div className="flex-1" />
 
-          {/* Desktop Navigation — right-aligned, beside Sign in */}
+          {/* Desktop Navigation — right-aligned, beside Contact us */}
           <div className="hidden lg:flex items-center gap-1 mr-5">
             {nav.map((link) => {
               const active = pathname.startsWith(link.href);
@@ -52,7 +52,7 @@ export function Navigation() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center">
             <Button asChild size="sm" className="bg-brand hover:bg-brand-dk text-white font-bold rounded-[11px] shadow-glow px-[18px] py-[10px] h-auto text-[14px]">
-              <Link href="/walkthrough">Sign in</Link>
+              <Link href="/contact">Contact us</Link>
             </Button>
           </div>
 
@@ -76,7 +76,7 @@ export function Navigation() {
       >
         <div className="flex flex-col h-full px-8 pt-10 pb-8 overflow-y-auto">
           <div className="flex-1 flex flex-col justify-center gap-4">
-            {[...nav, { label: "Contact", href: "/contact" }].map((link, i) => (
+            {nav.map((link, i) => (
               <Link
                 key={link.label}
                 href={link.href}
@@ -98,7 +98,7 @@ export function Navigation() {
             style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
             <Button asChild className="flex-1 bg-brand hover:bg-brand-dk text-white font-bold rounded-[11px] h-14 text-base shadow-glow">
-              <Link href="/walkthrough" onClick={() => setIsMobileMenuOpen(false)}>Sign in</Link>
+              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact us</Link>
             </Button>
           </div>
         </div>

@@ -17,8 +17,8 @@ const integrations = [
   { name: "Google Cloud & Gemini", category: "Speech & fallback · Live" },
   { name: "Deepgram & AssemblyAI", category: "Speech-to-text · Live" },
   { name: "Stripe", category: "Billing · Live" },
-  { name: "Instagram, Facebook & WhatsApp", category: "Messaging channels · In rollout" },
-  { name: "Product & parts feeds", category: "Commerce & catalog · In rollout" },
+  { name: "Instagram, Facebook, WhatsApp & TikTok", category: "Messaging & reviews · Live" },
+  { name: "Shopify, ERP, PIM & POS feeds", category: "Commerce & catalog · Live" },
   { name: "Accounting & payments", category: "Invoice status · Coming" },
 ];
 

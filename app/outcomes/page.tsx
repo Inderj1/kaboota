@@ -28,7 +28,7 @@ export default function ResultsPage() {
           <Eyebrow>Not yet reported</Eyebrow>
           <h2 className="mt-3 max-w-[28ch] text-[clamp(26px,3.2vw,38px)]">Running, but nothing measured to publish</h2>
           <p className="mt-3 max-w-[64ch] text-[16px] text-ink-2">
-            These are live or in rollout. When each has a full reporting period behind it, its numbers will appear above with the window attached — and not before.
+            These are live. When each has a full reporting period behind it, its numbers will appear above with the window attached — and not before.
           </p>
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
             {proofOpen.map((q) => (

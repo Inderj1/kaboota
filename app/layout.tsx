@@ -30,7 +30,7 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Kaboota — Conversation-to-action intelligence for service businesses',
+    default: 'Kaboota — Conversation-to-action intelligence for service businesses and showrooms',
     template: '%s | Kaboota',
   },
   description:

@@ -136,7 +136,7 @@ export default function ProductPage() {
           </div>
           <div className="mt-10">
             <SectionHead eyebrow="The right desk" title={desks.h2} sub={desks.sub} titleClass="max-w-[26ch]" />
-            <div className="mt-[26px] grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            <div className="mt-[26px] grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {desks.items.map((d) => (
                 <Card key={d.k} className="flex flex-col gap-[7px]">
                   <span className="kb-label-sm text-brand-txt">{d.k}</span>
