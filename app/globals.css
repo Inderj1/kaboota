@@ -1,0 +1,322 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Design tokens — ported from the Kaboota design system.
+  Warm cream canvas, paper cards, one green that always means "live / revenue",
+  olive dark panels with a mint accent, and amber / blue / red for status.
+*/
+:root {
+  --canvas: #f4efe7;
+  --paper: #fffdf9;
+  --paper-2: #fbf8f3;
+  --ink: #211d17;
+  --ink-2: #5b5347;
+  --ink-3: #8a8072;
+
+  --brand: #1f9d5c;
+  --brand-dk: #157a47;
+  --brand-soft: #e1f2e7;
+  --brand-txt: #11603a;
+  --brand-line: #c8e6d4;
+
+  --olive: #1a1d18;
+  --olive-2: #1d3324;
+  --mint: #7fe6ab;
+  --mint-ink: #0f2418;
+
+  --amber: #c98a1e;
+  --amber-soft: #f8ecd4;
+  --amber-txt: #7d5410;
+  --red: #cf5237;
+  --red-soft: #fadfd8;
+  --red-txt: #8c2f19;
+  --blue: #3a7fa0;
+  --blue-soft: #dceaf1;
+  --blue-txt: #215169;
+
+  --line: #e7ddd0;
+  --line-2: #d8cbb9;
+  --chip: #f2ece3;
+  --chip-2: #ece6dc;
+  --toggle: #eae2d6;
+
+  --sh-1: 0 1px 2px rgba(40, 30, 15, 0.06), 0 2px 8px rgba(40, 30, 15, 0.05);
+  --sh-2: 0 2px 6px rgba(40, 30, 15, 0.07), 0 12px 32px rgba(40, 30, 15, 0.09);
+  --sh-3: 0 24px 64px rgba(40, 30, 15, 0.16);
+  --glow: 0 4px 14px rgba(31, 157, 92, 0.32);
+
+  /* shadcn/ui token bridge so the ui/* primitives inherit the palette */
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--brand);
+  --primary-foreground: #ffffff;
+  --secondary: var(--chip);
+  --secondary-foreground: var(--ink);
+  --muted: var(--chip);
+  --muted-foreground: var(--ink-2);
+  --accent: var(--brand-soft);
+  --accent-foreground: var(--brand-txt);
+  --destructive: var(--red);
+  --destructive-foreground: #ffffff;
+  --border: var(--line);
+  --input: var(--line-2);
+  --ring: var(--brand);
+  --chart-1: var(--brand);
+  --chart-2: var(--amber);
+  --chart-3: var(--blue);
+  --chart-4: var(--red);
+  --chart-5: var(--ink-3);
+  --radius: 0.75rem;
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--brand);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--brand-soft);
+  --sidebar-accent-foreground: var(--brand-txt);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--brand);
+}
+
+@theme inline {
+  --font-sans: var(--font-hanken), 'Hanken Grotesk', system-ui, sans-serif;
+  --font-display: var(--font-bricolage), 'Bricolage Grotesque', Georgia, serif;
+  --font-mono: var(--font-space-mono), 'Space Mono', ui-monospace, monospace;
+
+  --color-canvas: var(--canvas);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-brand: var(--brand);
+  --color-brand-dk: var(--brand-dk);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-txt: var(--brand-txt);
+  --color-brand-line: var(--brand-line);
+  --color-olive: var(--olive);
+  --color-olive-2: var(--olive-2);
+  --color-mint: var(--mint);
+  --color-mint-ink: var(--mint-ink);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-amber-txt: var(--amber-txt);
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-red-txt: var(--red-txt);
+  --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-blue-txt: var(--blue-txt);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-chip: var(--chip);
+  --color-chip-2: var(--chip-2);
+  --color-toggle: var(--toggle);
+
+  --shadow-1: var(--sh-1);
+  --shadow-2: var(--sh-2);
+  --shadow-3: var(--sh-3);
+  --shadow-glow: var(--glow);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-canvas text-ink;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@keyframes kbWave {
+  0%, 100% { transform: scaleY(0.22); }
+  50% { transform: scaleY(1); }
+}
+@keyframes kbPulse {
+  0% { box-shadow: 0 0 0 0 rgba(31, 157, 92, 0.55); }
+  70% { box-shadow: 0 0 0 12px rgba(31, 157, 92, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(31, 157, 92, 0); }
+}
+@keyframes kbRing {
+  0% { transform: scale(0.9); opacity: 0.55; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes kbRise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes kbDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+@keyframes kbFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-mono { font-family: var(--font-mono); }
+
+  /* Kaboota label style: Space Mono, tracked caps */
+  .kb-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .kb-label-sm {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .dark-panel {
+    background: linear-gradient(120deg, var(--olive), var(--olive-2));
+    color: #fff;
+  }
+  .dark-panel-steep {
+    background: linear-gradient(150deg, var(--olive), var(--olive-2));
+    color: #fff;
+  }
+
+  .animate-wave { animation: kbWave 0.9s ease-in-out infinite; }
+  .animate-pulse-ring { animation: kbPulse 2s infinite; }
+  .animate-ring { animation: kbRing 1.8s infinite; }
+  .animate-rise { animation: kbRise 0.4s ease both; }
+  .animate-dot { animation: kbDot 1.2s infinite; }
+  .animate-float { animation: kbFloat 6s ease-in-out infinite; }
+
+  .nowrap-lg { white-space: normal; }
+  @media (min-width: 1024px) {
+    .nowrap-lg { white-space: nowrap; }
+  }
+
+  /* ---- Optimus template utilities (kept, recoloured to the Kaboota palette) ---- */
+  .text-stroke {
+    -webkit-text-stroke: 1.5px var(--brand-dk);
+    -webkit-text-fill-color: transparent;
+  }
+
+  .marquee { animation: marquee 30s linear infinite; }
+  .marquee-reverse { animation: marquee-reverse 25s linear infinite; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes marquee-reverse { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+  .line-reveal {
+    clip-path: inset(0 100% 0 0);
+    animation: line-reveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  }
+  @keyframes line-reveal { to { clip-path: inset(0 0 0 0); } }
+
+  .hover-lift { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .hover-lift:hover { transform: translateY(-4px); }
+
+  .letter-spin { display: inline-block; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .letter-spin:hover { transform: rotateY(360deg); }
+
+  .animate-char-in {
+    animation: char-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+    filter: blur(40px);
+    transform: translateY(100%);
+  }
+  @keyframes char-in {
+    0% { opacity: 0; filter: blur(40px); transform: translateY(100%); }
+    100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+  }
+
+  .noise-overlay { position: relative; }
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .border-sketch {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--paper), var(--paper)) padding-box,
+      linear-gradient(135deg, var(--line-2) 25%, transparent 25%, transparent 50%, var(--line-2) 50%, var(--line-2) 75%, transparent 75%) border-box;
+    background-size: 100% 100%, 8px 8px;
+  }
+}
