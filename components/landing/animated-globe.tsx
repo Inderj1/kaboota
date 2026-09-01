@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { sectors } from "@/lib/content";
 
 /**
  * Hero visual: the Optimus ASCII globe, made into a call-centre globe.
@@ -18,29 +19,101 @@ const MINT = "127,230,171";
 
 // lat/lon in radians; hub = the one pipeline everything routes to
 const NODES = [
-  { lat: 0.55, lon: -1.9, label: "VOICE" },
-  { lat: -0.35, lon: -0.9, label: "SMS" },
-  { lat: 0.75, lon: 0.4, label: "CHAT" },
-  { lat: -0.6, lon: 1.3, label: "EMAIL" },
-  { lat: 0.2, lon: 2.4, label: "DMS" },
-  { lat: -0.85, lon: -2.6, label: "COUNTER" },
-];
+  { lat: 0.55, lon: -1.9, label: "VOICE", icon: "phone" },
+  { lat: -0.35, lon: -0.9, label: "SMS", icon: "sms" },
+  { lat: 0.75, lon: 0.4, label: "CHAT", icon: "chat" },
+  { lat: -0.6, lon: 1.3, label: "EMAIL", icon: "mail" },
+  { lat: 0.2, lon: 2.4, label: "DMS", icon: "dm" },
+  { lat: -0.85, lon: -2.6, label: "COUNTER", icon: "store" },
+] as const;
+
+// Industry ring: where it runs, with the honest status per sector
+const RING = sectors.map((sec) => ({ label: sec.k.replace(" & ", " & ").toUpperCase(), status: sec.status }));
+const STATUS_COLOR: Record<string, string> = { LIVE: "#1f9d5c", "IN ROLLOUT": "#c98a1e", COMING: "#8a8072", PILOT: "#3a7fa0", MEASURED: "#1f9d5c", PROJECTED: "#8a8072" };
+
+/** Small line icons for each channel, drawn centred on (x, y) inside a box of `s` px. */
+function drawIcon(ctx: CanvasRenderingContext2D, kind: string, x: number, y: number, s: number, color: string) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.strokeStyle = color;
+  ctx.fillStyle = color;
+  ctx.lineWidth = Math.max(1.2, s * 0.14);
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  const h = s / 2;
+  ctx.beginPath();
+  switch (kind) {
+    case "phone": // handset
+      ctx.moveTo(-h * 0.75, -h * 0.55);
+      ctx.quadraticCurveTo(-h * 0.85, h * 0.6, h * 0.6, h * 0.8);
+      ctx.lineTo(h * 0.8, h * 0.35);
+      ctx.lineTo(h * 0.3, h * 0.1);
+      ctx.lineTo(h * 0.05, h * 0.35);
+      ctx.quadraticCurveTo(-h * 0.35, h * 0.05, -h * 0.35, -h * 0.35);
+      ctx.lineTo(-h * 0.15, -h * 0.55);
+      ctx.lineTo(-h * 0.4, -h * 0.9);
+      ctx.closePath();
+      ctx.stroke();
+      break;
+    case "sms": // bubble with dots
+      roundRectPath(ctx, -h, -h * 0.75, s, h * 1.2, h * 0.35);
+      ctx.moveTo(-h * 0.45, h * 0.45); ctx.lineTo(-h * 0.7, h * 0.95); ctx.lineTo(-h * 0.05, h * 0.45);
+      ctx.stroke();
+      [-0.4, 0, 0.4].forEach((dx) => { ctx.beginPath(); ctx.arc(dx * h, -h * 0.15, h * 0.11, 0, Math.PI * 2); ctx.fill(); });
+      break;
+    case "chat": // bubble with lines
+      roundRectPath(ctx, -h, -h * 0.75, s, h * 1.2, h * 0.35);
+      ctx.moveTo(h * 0.45, h * 0.45); ctx.lineTo(h * 0.7, h * 0.95); ctx.lineTo(h * 0.05, h * 0.45);
+      ctx.moveTo(-h * 0.55, -h * 0.3); ctx.lineTo(h * 0.55, -h * 0.3);
+      ctx.moveTo(-h * 0.55, h * 0.05); ctx.lineTo(h * 0.15, h * 0.05);
+      ctx.stroke();
+      break;
+    case "mail": // envelope
+      roundRectPath(ctx, -h, -h * 0.65, s, h * 1.3, h * 0.2);
+      ctx.moveTo(-h, -h * 0.55); ctx.lineTo(0, h * 0.1); ctx.lineTo(h, -h * 0.55);
+      ctx.stroke();
+      break;
+    case "dm": // two overlapping bubbles
+      roundRectPath(ctx, -h, -h * 0.85, s * 0.72, h * 0.95, h * 0.3);
+      ctx.stroke();
+      ctx.beginPath();
+      roundRectPath(ctx, -h * 0.3, -h * 0.1, s * 0.65, h * 0.95, h * 0.3);
+      ctx.moveTo(h * 0.55, h * 0.85); ctx.lineTo(h * 0.8, h * 1.1); ctx.lineTo(h * 0.2, h * 0.85);
+      ctx.stroke();
+      break;
+    default: // store: awning + door
+      ctx.moveTo(-h, -h * 0.35); ctx.lineTo(-h * 0.85, -h * 0.9); ctx.lineTo(h * 0.85, -h * 0.9); ctx.lineTo(h, -h * 0.35);
+      ctx.moveTo(-h, -h * 0.35); ctx.quadraticCurveTo(-h * 0.5, 0.05 * h, 0, -h * 0.35); ctx.quadraticCurveTo(h * 0.5, 0.05 * h, h, -h * 0.35);
+      ctx.moveTo(-h * 0.8, -h * 0.2); ctx.lineTo(-h * 0.8, h * 0.9); ctx.lineTo(h * 0.8, h * 0.9); ctx.lineTo(h * 0.8, -h * 0.2);
+      ctx.moveTo(-h * 0.15, h * 0.9); ctx.lineTo(-h * 0.15, h * 0.2); ctx.lineTo(h * 0.35, h * 0.2); ctx.lineTo(h * 0.35, h * 0.9);
+      ctx.stroke();
+  }
+  ctx.restore();
+}
+function roundRectPath(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
 const HUB = { lat: 0.08, lon: 0.0 };
 
 // What each channel's conversation was, when it arrived, and the action it ended in (from the Kaboota pilot copy)
 const CASES = [
-  { node: 0, when: "TUE 10:42 AM", tag: "VOICE · EMERGENCY", what: "\u201cWalk-in freezer's completely down\u201d", then: "Tech booked today 2:00 PM · PO 44-1180" },
-  { node: 1, when: "FRI 4:52 PM", tag: "SMS · MISSED CALL", what: "Rang out while closing a ticket", then: "Texted back in 30s · photo intake started" },
-  { node: 2, when: "WED 12:10 PM", tag: "CHAT · BOOKING", what: "\u201cCan you get me in Tuesday?\u201d", then: "Live availability checked · slot held" },
-  { node: 3, when: "MON 8:15 AM", tag: "EMAIL · ESTIMATE RESCUE", what: "Open quote, nine days quiet", then: "Day-9 email sent · objection on record" },
-  { node: 4, when: "SAT 11:20 PM", tag: "DMS · SAFETY", what: "Instagram DM: no heat, newborn at home", then: "Jumped the queue · escalated L1 \u2192 L2" },
-  { node: 5, when: "THU 3:05 PM", tag: "COUNTER · PARTS", what: "Fitment question at the desk", then: "Checked against stock · lead time given" },
-  { node: 0, when: "SUN 2:07 AM", tag: "VOICE · AFTER HOURS", what: "No heat, rings out on the truck line", then: "Answered first ring · diagnostic booked 8:00 AM" },
-  { node: 1, when: "TUE 6:30 PM", tag: "SMS · REMINDER", what: "Maintenance renewal due, no reply yet", then: "Reminder sent · confirmed by text in 4 min" },
-  { node: 2, when: "MON 9:48 AM", tag: "CHAT · RETURNING CUSTOMER", what: "\u201cIt's the same unit as last spring\u201d", then: "History pulled · warranty position on screen" },
-  { node: 3, when: "WED 7:02 AM", tag: "EMAIL · QUOTE REQUEST", what: "Rooftop unit replacement, three bids", then: "Routed to sales desk · record written to CRM" },
-  { node: 0, when: "FRI 11:10 AM", tag: "VOICE · GAS SMELL", what: "\u201cThere's a smell near the furnace\u201d", then: "Hang up and call 911 · exception logged" },
-  { node: 5, when: "SAT 10:35 AM", tag: "COUNTER · WALK-IN", what: "Warranty claim, no paperwork", then: "Matched to job #4418 · billing desk owns it" },
+  { node: 0, when: "TUE 10:42 AM", trade: "HVAC", tag: "VOICE · EMERGENCY", what: "\u201cWalk-in freezer's completely down\u201d", then: "Tech booked today 2:00 PM · PO 44-1180" },
+  { node: 1, when: "FRI 4:52 PM", trade: "PLUMBING", tag: "SMS · MISSED CALL", what: "Rang out while closing a ticket", then: "Texted back in 30s · photo intake started" },
+  { node: 2, when: "WED 12:10 PM", trade: "HVAC", tag: "CHAT · BOOKING", what: "\u201cCan you get me in Tuesday?\u201d", then: "Live availability checked · slot held" },
+  { node: 3, when: "MON 8:15 AM", trade: "ROOFING", tag: "EMAIL · ESTIMATE RESCUE", what: "Open quote, nine days quiet", then: "Day-9 email sent · objection on record" },
+  { node: 4, when: "SAT 11:20 PM", trade: "HVAC", tag: "DMS · SAFETY", what: "Instagram DM: no heat, newborn at home", then: "Jumped the queue · escalated L1 \u2192 L2" },
+  { node: 5, when: "THU 3:05 PM", trade: "AUTOMOTIVE", tag: "COUNTER · PARTS", what: "Fitment question at the desk", then: "Checked against stock · lead time given" },
+  { node: 0, when: "SUN 2:07 AM", trade: "HVAC", tag: "VOICE · AFTER HOURS", what: "No heat, rings out on the truck line", then: "Answered first ring · diagnostic booked 8:00 AM" },
+  { node: 1, when: "TUE 6:30 PM", trade: "PLUMBING", tag: "SMS · REMINDER", what: "Maintenance renewal due, no reply yet", then: "Reminder sent · confirmed by text in 4 min" },
+  { node: 2, when: "MON 9:48 AM", trade: "HVAC", tag: "CHAT · RETURNING CUSTOMER", what: "\u201cIt's the same unit as last spring\u201d", then: "History pulled · warranty position on screen" },
+  { node: 3, when: "WED 7:02 AM", trade: "MECHANICAL", tag: "EMAIL · QUOTE REQUEST", what: "Rooftop unit replacement, three bids", then: "Routed to sales desk · record written to CRM" },
+  { node: 0, when: "FRI 11:10 AM", trade: "HVAC", tag: "VOICE · GAS SMELL", what: "\u201cThere's a smell near the furnace\u201d", then: "Hang up and call 911 · exception logged" },
+  { node: 5, when: "SAT 10:35 AM", trade: "RETAIL", tag: "COUNTER · WALK-IN", what: "Warranty claim, no paperwork", then: "Matched to job #4418 · billing desk owns it" },
 ];
 
 // Fields extracted, human nudges and handoffs as conversations reach the hub
@@ -116,8 +189,9 @@ export function AnimatedGlobe() {
       ctx.clearRect(0, 0, w, h);
       const cx = w / 2, cy = h / 2;
       // radius from the narrower axis, with the canvas taller than wide so pulses/glyphs never clip top or bottom
-      const R = Math.min(w, h / 1.12) * 0.45;
-      const spin = time * 0.22;
+      const R = Math.min(w, h / 1.12) * 0.42;
+      const ringR = R * 1.16, ringTilt = 1.22; // industry ring: tilted orbit round the globe
+      const spin = time * 0.17;
       const tilt = 0.38;
       const project = (p: V) => {
         const q = rotX(rotY(p, spin), tilt);
@@ -125,6 +199,30 @@ export function AnimatedGlobe() {
       };
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+
+      // 0 — Industry ring (back half first, so the globe sits in front of it)
+      const ringPts = RING.map((r, i) => {
+        const a0 = (i / RING.length) * Math.PI * 2 + time * 0.05;
+        const q = rotX({ x: Math.cos(a0) * ringR, y: 0, z: Math.sin(a0) * ringR }, ringTilt);
+        return { ...r, sx: cx + q.x, sy: cy - q.y, z: q.z / ringR };
+      });
+      const drawRingArc = (front: boolean) => {
+        ctx.strokeStyle = front ? `rgba(${BRAND_DK},0.35)` : `rgba(${BRAND_DK},0.12)`;
+        ctx.lineWidth = 1;
+        ctx.setLineDash([2, 5]);
+        ctx.beginPath();
+        let drawing = false;
+        for (let k = 0; k <= 120; k++) {
+          const a0 = (k / 120) * Math.PI * 2 + time * 0.05;
+          const q = rotX({ x: Math.cos(a0) * ringR, y: 0, z: Math.sin(a0) * ringR }, ringTilt);
+          const isFront = q.z > 0;
+          if (isFront !== front) { drawing = false; continue; }
+          if (!drawing) { ctx.moveTo(cx + q.x, cy - q.y); drawing = true; } else ctx.lineTo(cx + q.x, cy - q.y);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      };
+      drawRingArc(false);
 
       // 1 — The globe itself (ASCII lat/long grid, depth-shaded), same treatment as the template
       ctx.font = "12px monospace";
@@ -176,7 +274,7 @@ export function AnimatedGlobe() {
         ctx.strokeStyle = `rgba(${BRAND},${(0.25 + Math.max(0, front) * 0.55).toFixed(3)})`;
         ctx.stroke();
         // a packet travelling along the arc
-        const tt = (time * 0.35 + i / NODES.length) % 1;
+        const tt = (time * 0.2 + i / NODES.length) % 1;
         const pv = slerp(a, hubV, tt);
         const lift = 1 + 0.05 * Math.sin(tt * Math.PI);
         const pp = project({ x: pv.x * lift, y: pv.y * lift, z: pv.z * lift });
@@ -203,20 +301,49 @@ export function AnimatedGlobe() {
         ctx.beginPath();
         ctx.arc(p.sx, p.sy, 4 + pulse * 22 * (0.5 + depth * 0.5), 0, Math.PI * 2);
         ctx.stroke();
-        ctx.fillStyle = `rgba(${BRAND},${alpha.toFixed(3)})`;
+        // paper disc with the channel icon
+        const rad = 8 + depth * 4;
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = "#fffdf9";
         ctx.beginPath();
-        ctx.arc(p.sx, p.sy, 3.5 + depth * 2.5, 0, Math.PI * 2);
+        ctx.arc(p.sx, p.sy, rad, 0, Math.PI * 2);
         ctx.fill();
+        ctx.strokeStyle = `rgba(${BRAND},1)`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        drawIcon(ctx, n.icon, p.sx, p.sy, rad * 1.05, "#157a47");
+        ctx.restore();
         if (p.z > 0.1) {
           ctx.font = `bold ${(9 + depth * 2.5).toFixed(1)}px monospace`;
           ctx.fillStyle = `rgba(${BRAND_DK},${alpha.toFixed(3)})`;
-          ctx.fillText(n.label.split("").join(" "), p.sx, p.sy - 13 - depth * 3);
+          ctx.fillText(n.label.split("").join(" "), p.sx, p.sy - 17 - depth * 5);
         }
+      });
+
+      // 4b — Industry ring, front half, with labels where it runs
+      drawRingArc(true);
+      ctx.font = `bold 8px ${MONO}`;
+      ringPts.forEach((r) => {
+        if (r.z < 0.05) return;
+        const a = 0.25 + r.z * 0.75;
+        const text = r.label.split("").join(" ");
+        const tw = ctx.measureText(text).width;
+        const lx = Math.max(8 + tw / 2 + 12, Math.min(w - 8 - tw / 2, r.sx + 8));
+        ctx.fillStyle = STATUS_COLOR[r.status] || "#8a8072";
+        ctx.globalAlpha = a;
+        ctx.beginPath();
+        ctx.arc(lx - tw / 2 - 8, r.sy, 2.6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#211d17";
+        ctx.textAlign = "center";
+        ctx.fillText(text, lx, r.sy);
+        ctx.globalAlpha = 1;
       });
 
       // 5 — One conversation at a time: the node rings, and a card says what it ended in
       {
-        const period = 3.2;
+        const period = 4.8;
         const idx = Math.floor(time / period) % CASES.length;
         const ph = (time % period) / period;
         const vis = Math.min(ease(ph / 0.12), ease((1 - ph) / 0.12)); // fade in / hold / fade out
@@ -238,7 +365,7 @@ export function AnimatedGlobe() {
             ctx.stroke();
           }
           // card, placed toward the centre so it stays inside the canvas
-          const cw = 226, ch = 58;
+          const cw = 248, ch = 58;
           const dirX = at.sx < cx ? 1 : -1;
           const cxCard = at.sx + dirX * 34 - (dirX < 0 ? cw : 0);
           const atHub = p.z <= 0;
@@ -274,10 +401,15 @@ export function AnimatedGlobe() {
           ctx.font = `bold 9px ${MONO}`;
           ctx.fillStyle = "#11603a";
           ctx.fillText(c.tag, cardX + 12, cyCard + 14);
+          // right-hand stamp: trade + time, or just the time if the row is tight
+          ctx.font = `bold 9px ${MONO}`;
+          const tagW = ctx.measureText(c.tag).width;
+          ctx.font = `8px ${MONO}`;
+          let stamp = `${c.trade} · ${c.when}`;
+          if (tagW + ctx.measureText(stamp).width > cw - 34) stamp = c.when;
           ctx.textAlign = "right";
-          ctx.font = `8.5px ${MONO}`;
           ctx.fillStyle = "#8a8072";
-          ctx.fillText(c.when, cardX + cw - 12, cyCard + 14);
+          ctx.fillText(stamp, cardX + cw - 12, cyCard + 14);
           ctx.textAlign = "left";
           ctx.font = `600 11.5px ${SANS}`;
           ctx.fillStyle = "#211d17";
@@ -308,13 +440,13 @@ export function AnimatedGlobe() {
       // 7 — Extracted fields: a chip floats up from the hub as each conversation arrives
       if (hp.z > -0.2) {
         NODES.forEach((_, i) => {
-          const tt = (time * 0.35 + i / NODES.length) % 1;
+          const tt = (time * 0.2 + i / NODES.length) % 1;
           // visible from just before arrival until shortly after
-          const win = tt > 0.96 ? (tt - 0.96) / 0.04 : tt < 0.12 ? 1 + tt / 0.12 : -1; // one chip at a time
+          const win = tt > 0.95 ? (tt - 0.95) / 0.05 : tt < 0.14 ? 1 + tt / 0.14 : -1; // one chip at a time
           if (win < 0) return;
           const rise = win > 1 ? win - 1 : 0; // 0 → 1 after arrival
           const alpha = win <= 1 ? win : 1 - rise;
-          const text = CHIPS[(i + Math.floor(time * 0.35)) % CHIPS.length];
+          const text = CHIPS[(i + Math.floor(time * 0.2)) % CHIPS.length];
           ctx.font = `bold 9px ${MONO}`;
           const tw = ctx.measureText(text).width + 18;
           const x = Math.max(8, Math.min(w - tw - 8, hp.sx - tw / 2 + (i % 2 ? 26 : -26))); // keep inside the canvas
@@ -336,7 +468,7 @@ export function AnimatedGlobe() {
 
       // 8 — The decision layer, step by step, in time with each arrival
       {
-        const active = Math.floor(((time * 0.35) % 1) * STEPS.length);
+        const active = Math.floor(((time * 0.2) % 1) * STEPS.length);
         ctx.font = `bold 8.5px ${MONO}`;
         const gap = 28;
         const widths = STEPS.map((t) => ctx.measureText(t.split("").join(" ")).width);
