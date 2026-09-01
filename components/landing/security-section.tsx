@@ -34,7 +34,7 @@ export function SecuritySection() {
           >
             <span className="inline-flex items-center gap-3 kb-label mb-6">
               <span className="w-8 h-px bg-line-2" />
-              10 · Trust
+              Trust
             </span>
             <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-8">
               Recording calls is serious.

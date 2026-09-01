@@ -3,7 +3,7 @@
  * Drawn in the site palette — no icon library.
  */
 export function ChannelFlow({ className }: { className?: string }) {
-  const channels = ["Voice", "SMS", "Web chat", "Email", "Social", "Counter"];
+  const channels = ["Voice", "SMS", "Web chat", "Email", "DMs", "Counter"];
   const outputs = ["Jobs booked", "Evidence-linked record", "Right desk", "Revenue board"];
   const W = 640;
   const cx = W / 2;

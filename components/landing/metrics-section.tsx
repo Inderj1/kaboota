@@ -25,7 +25,7 @@ export function MetricsSection() {
         <div className="mb-12 lg:mb-16">
           <span className="inline-flex items-center gap-3 kb-label mb-6">
             <span className="w-8 h-px bg-line-2" />
-            08 · Monday morning
+            Monday morning
           </span>
           <h2
             className={`max-w-[22ch] text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${

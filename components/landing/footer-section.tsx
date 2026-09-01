@@ -4,11 +4,11 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedWave } from "./animated-wave";
 import { LogoMark } from "@/components/site/logo";
-import { brand, ctas, closing, footerCols } from "@/lib/content";
+import { brand, footerCols } from "@/lib/content";
 
 const contactLinks = [
   { name: brand.emails.hello, href: `mailto:${brand.emails.hello}` },
-  { name: brand.phone, href: "#" },
+  { name: brand.phone, href: `tel:${brand.phone.replace(/^\*72 · /, "+1").replace(/\s/g, "")}` },
 ];
 
 export function FooterSection() {
@@ -20,22 +20,9 @@ export function FooterSection() {
       </div>
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        {/* Closing CTA */}
-        <div className="pt-16 lg:pt-24 flex flex-col lg:flex-row lg:items-end gap-8 pb-12 border-b border-white/[0.13]">
-          <div className="flex-1">
-            <h2 className="text-3xl lg:text-5xl font-display text-white max-w-[20ch]">{closing.h2}</h2>
-            <p className="mt-4 text-white/70 max-w-[52ch]">{closing.p}</p>
-            <p className="mt-4 font-mono text-[11px] tracking-[.1em] uppercase text-mint">{brand.brandLine}</p>
-          </div>
-          <div className="flex gap-3 flex-wrap">
-            <Link href={ctas.primary.href} className="px-6 py-[15px] rounded-[11px] bg-brand text-white font-bold shadow-glow hover:bg-mint hover:text-mint-ink transition-colors">{ctas.primary.label}</Link>
-            <Link href={ctas.secondary.href} className="px-6 py-[15px] rounded-[11px] border border-white/25 text-white font-semibold hover:border-white transition-colors">{ctas.secondary.label}</Link>
-          </div>
-        </div>
-
         {/* Main Footer */}
-        <div className="py-16">
-          <div className="grid grid-cols-2 md:grid-cols-7 gap-12 lg:gap-8">
+        <div className="pt-16 lg:pt-20 pb-16">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-12 lg:gap-8">
             <div className="col-span-2">
               <Link href="/" className="inline-flex items-center gap-[10px] mb-6">
                 <LogoMark size={28} className="!shadow-none" />

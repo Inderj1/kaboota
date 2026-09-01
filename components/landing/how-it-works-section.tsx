@@ -72,7 +72,7 @@ export function HowItWorksSection() {
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 kb-label !text-mint mb-6">
             <span className="w-8 h-px bg-mint/40" />
-            06 · The decision layer
+            The decision layer
           </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight text-white transition-all duration-700 ${

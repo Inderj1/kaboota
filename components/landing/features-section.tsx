@@ -256,7 +256,7 @@ export function FeaturesSection() {
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 kb-label mb-6">
             <span className="w-8 h-px bg-line-2" />
-            01 · Deployment model
+            Deployment model
           </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${

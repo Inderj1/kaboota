@@ -39,7 +39,7 @@ export function InfrastructureSection() {
           >
             <span className="inline-flex items-center gap-3 kb-label mb-6">
               <span className="w-8 h-px bg-line-2" />
-              02 · Every channel
+              Every channel
             </span>
             <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-8">
               The phone is the loudest leak,
@@ -49,7 +49,7 @@ export function InfrastructureSection() {
             <p className="text-xl text-ink-2 leading-relaxed mb-10">{channelIntro.sub}</p>
 
             {/* 03 · One record */}
-            <span className="kb-label-sm block text-ink-3 mb-3">03 · One record — {memory.h2.toLowerCase()}</span>
+            <span className="kb-label-sm block text-ink-3 mb-3">One record — {memory.h2.toLowerCase()}</span>
             <div className="grid sm:grid-cols-2 gap-4">
               {memory.cards.map((m) => (
                 <div key={m.h} className="rounded-2xl border border-line bg-paper p-4 shadow-1">

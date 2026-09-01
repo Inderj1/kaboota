@@ -111,10 +111,10 @@ export function HeroSection() {
           <span className="hidden sm:block h-px flex-1 bg-line" />
           <span className="font-mono text-[10px] tracking-[.1em] uppercase text-brand-txt">Measured · one week · mechanical-services pilot</span>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 sm:gap-x-8 gap-y-8">
           {stats.map((stat) => (
-            <div key={stat.label} className="flex items-baseline gap-4">
-              <span className="text-4xl lg:text-5xl font-display font-bold tracking-[-0.03em]">{stat.value}</span>
+            <div key={stat.label} className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+              <span className="text-[2rem] sm:text-4xl lg:text-5xl font-display font-bold tracking-[-0.03em] leading-none">{stat.value}</span>
               <span className="text-sm text-ink-2">
                 {stat.label}
                 <span className="block whitespace-nowrap font-mono text-[10px] tracking-[.1em] text-brand-txt mt-1 uppercase">{stat.delta}</span>

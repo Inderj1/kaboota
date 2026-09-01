@@ -191,6 +191,8 @@ export function AnimatedGlobe() {
       // radius from the narrower axis, with the canvas taller than wide so pulses/glyphs never clip top or bottom
       const R = Math.min(w, h / 1.12) * 0.42;
       const ringR = R * 1.16, ringTilt = 1.22; // industry ring: tilted orbit round the globe
+      const roomy = w >= 440; // phones: no letter-spacing, tighter trace, so labels stay inside the canvas
+      const spaced = (t: string) => (roomy ? t.split("").join(" ") : t);
       const spin = time * 0.17;
       const tilt = 0.38;
       const project = (p: V) => {
@@ -327,7 +329,7 @@ export function AnimatedGlobe() {
       ringPts.forEach((r) => {
         if (r.z < 0.05) return;
         const a = 0.25 + r.z * 0.75;
-        const text = r.label.split("").join(" ");
+        const text = spaced(r.label);
         const tw = ctx.measureText(text).width;
         const lx = Math.max(8 + tw / 2 + 12, Math.min(w - 8 - tw / 2, r.sx + 8));
         ctx.fillStyle = STATUS_COLOR[r.status] || "#8a8072";
@@ -469,9 +471,9 @@ export function AnimatedGlobe() {
       // 8 — The decision layer, step by step, in time with each arrival
       {
         const active = Math.floor(((time * 0.2) % 1) * STEPS.length);
-        ctx.font = `bold 8.5px ${MONO}`;
-        const gap = 28;
-        const widths = STEPS.map((t) => ctx.measureText(t.split("").join(" ")).width);
+        ctx.font = `bold ${roomy ? 8.5 : 7.5}px ${MONO}`;
+        const gap = roomy ? 28 : 16;
+        const widths = STEPS.map((t) => ctx.measureText(spaced(t)).width);
         const total = widths.reduce((a, b) => a + b, 0) + gap * (STEPS.length - 1);
         let x = cx - total / 2;
         const y = h - 12;
@@ -479,7 +481,7 @@ export function AnimatedGlobe() {
           const on = i === active;
           ctx.textAlign = "left";
           ctx.fillStyle = on ? `rgba(${BRAND_DK},1)` : "rgba(138,128,114,0.75)";
-          ctx.fillText(t.split("").join(" "), x, y);
+          ctx.fillText(spaced(t), x, y);
           if (on) {
             ctx.fillStyle = `rgba(${BRAND},1)`;
             ctx.beginPath();
@@ -489,7 +491,7 @@ export function AnimatedGlobe() {
           x += widths[i];
           if (i < STEPS.length - 1) {
             ctx.fillStyle = "rgba(216,203,185,1)";
-            ctx.fillText("\u2192", x + 10, y);
+            ctx.fillText("\u2192", x + (roomy ? 10 : 4), y);
             x += gap;
           }
         });

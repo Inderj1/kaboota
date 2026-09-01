@@ -109,7 +109,7 @@ export const channels: { k: string; h: string; d: string; status: Status }[] = [
   { k: "SMS", h: "Text back and forth", d: "Missed-call recovery, photo intake, confirmations and the follow-up nobody had time to send.", status: "LIVE" },
   { k: "Web chat", h: "The box on your site", d: "The same brain as the phone, so the answer online matches the answer on the line.", status: "LIVE" },
   { k: "Email", h: "The inbox nobody owns", d: "Quote requests and service mail read, sorted and turned into records like any other conversation.", status: "LIVE" },
-  { k: "Social", h: "DMs and comments", d: "Instagram, Facebook and WhatsApp, where half your after-hours questions actually arrive.", status: "IN ROLLOUT" },
+  { k: "DMs", h: "DMs and comments", d: "Instagram, Facebook and WhatsApp, where half your after-hours questions actually arrive.", status: "IN ROLLOUT" },
   { k: "Search", h: "Google Business Profile", d: "The message sent straight from your map listing, answered instead of ignored.", status: "COMING" },
   { k: "Counter", h: "In person", d: "What was said at the desk, written into the same record as the call that started it.", status: "COMING" },
 ];
@@ -255,11 +255,9 @@ export const closing = {
 };
 
 export const footerCols = [
-  { h: "Product", items: [["Assistive mode", "/product#modes"], ["Autonomous mode", "/product#modes"], ["Decision layer", "/product#decision-layer"], ["Revenue board", "/product#dashboard"], ["Estimate rescue", "/product#around-the-call"], ["Catalog layer", "/product#catalog"]] },
-  { h: "Channels", items: [["Voice", "/#channels"], ["SMS", "/#channels"], ["Web chat", "/#channels"], ["Email", "/#channels"], ["Social", "/#channels"], ["Integrations", "/product#integrations"]] },
-  { h: "Solutions", items: [["By problem", "/solutions"], ["Outcomes", "/outcomes"], ["Where it runs", "/product#where-it-runs"], ["Getting live", "/plans#getting-live"], ["Partners", "/company#partners"]] },
-  { h: "Company", items: [["About", "/company"], ["Field notes", "/field-notes"], ["Pilot program", "/pilot"], ["Where it runs", "/product#where-it-runs"], ["Contact", "/contact"]] },
-  { h: "Trust", items: [["Security", "/security"], ["Call recording & consent", "/security#consent"], ["Messaging compliance", "/security#consent"], ["How we report", "/product#how-we-report"], ["Status", "/product#integrations"]] },
+  { h: "Product", items: [["Product", "/product"], ["Solutions", "/solutions"], ["Outcomes", "/outcomes"], ["Plans", "/plans"]] },
+  { h: "Company", items: [["About", "/company"], ["Field notes", "/field-notes"], ["Security", "/security"], ["Contact", "/contact"]] },
+  { h: "Get started", items: [["Start free pilot", "/pilot"], ["Book a walkthrough", "/walkthrough"]] },
 ];
 
 /* ------------------------------------------------------------------ */
