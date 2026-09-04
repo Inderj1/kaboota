@@ -83,7 +83,7 @@ export function HeroSection() {
             </h1>
 
             <p
-              className={`mt-6 text-[17px] lg:text-lg text-ink-2 leading-relaxed max-w-[52ch] transition-all duration-700 delay-200 ${
+              className={`mt-5 text-[17px] lg:text-lg text-ink-2 leading-relaxed max-w-[52ch] transition-all duration-700 delay-200 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
@@ -91,7 +91,7 @@ export function HeroSection() {
             </p>
 
             <div
-              className={`mt-7 flex flex-wrap items-center gap-3 transition-all duration-700 delay-300 ${
+              className={`mt-6 flex flex-wrap items-center gap-3 transition-all duration-700 delay-300 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
@@ -100,7 +100,7 @@ export function HeroSection() {
             </div>
 
             <ul
-              className={`mt-7 flex flex-wrap gap-x-6 gap-y-[10px] transition-all duration-700 delay-500 ${
+              className={`mt-5 flex flex-wrap gap-x-6 gap-y-[8px] transition-all duration-700 delay-500 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >

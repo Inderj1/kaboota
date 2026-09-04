@@ -42,7 +42,7 @@ export const ctas = {
 
 export const hero = {
   eyebrow: "Conversation-to-action intelligence for service businesses and showrooms",
-  sub: "Kaboota turns every call, text, chat, DM and review into verified structured data, decides the financially and operationally correct next move, executes the workflows you approve, and learns from what the job or the sale actually earned. Deploy it beside your people or let it run on its own — on top of whatever system you already use.",
+  sub: "A contractor on a roof, under a sink or at the dinner table can't pick up, and the job goes to whoever did. Kaboota answers every call, text, chat, DM and review, turns it into verified structured data, decides the right next move, executes the workflows you approve, and learns from what the job actually earned. Beside your people or on its own, on top of whatever system you already use — so nobody loses work for being busy at work, or home at night.",
   checks: ["Live in an afternoon", "Beside your team or autonomous", "Keeps your system of record", "Every field evidence-linked"],
 };
 
@@ -92,7 +92,7 @@ export const modes = {
     badge: "Executing",
     sub: "Kaboota handles the conversation end to end — answers, qualifies, decides, books, dispatches and follows up — inside the guardrails you wrote. Nobody goes to voicemail and nobody gets put on hold.",
     bullets: [
-      { h: "Answers on the first ring, always.", d: "Call, chat or text — after hours, during the rooftop job, on a Saturday." },
+      { h: "Answers on the first ring, always.", d: "Call, chat or text — on the rooftop mid-job, at 11 PM with the family, on a Saturday. The customer never hears voicemail, and the job stays yours." },
       { h: "Knows an emergency when it hears one.", d: "No-heat with a newborn jumps the queue. Gas smell means hang up and call 911." },
       { h: "Books the slot for real.", d: "Checks live availability in Google, Calendly, Cal.com or Microsoft, then confirms it." },
       { h: "Pulls the customer's history mid-call.", d: "Past service, equipment and warranty from your dispatch system, while they're still talking." },
