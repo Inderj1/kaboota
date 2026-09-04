@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { LogoMark } from "@/components/site/logo";
+import { Wordmark } from "@/components/site/logo";
 import { nav } from "@/lib/content";
 
 /** Kaboota header: sticky full-width bar, blurred cream background, 1px bottom rule. */
@@ -22,12 +22,9 @@ export function Navigation() {
       <nav className="mx-auto max-w-[1400px]">
         <div className="flex h-[68px] items-center px-6 lg:px-12">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-[11px] group" aria-label="Kaboota home">
-            <LogoMark size={34} />
-            <span className="flex flex-col items-start leading-none">
-              <span className="font-display font-bold tracking-tight text-[19px]">Kaboota</span>
-              <span className="font-mono tracking-[.11em] text-ink-3 text-[8.5px] mt-[3px]">CONVERSATION-TO-ACTION INTELLIGENCE</span>
-            </span>
+          <Link href="/" className="flex flex-col items-start leading-none group" aria-label="Kaboota home">
+            <Wordmark height={34} />
+            <span className="font-mono tracking-[.11em] text-ink-3 text-[8.5px] mt-[4px]">CONVERSATION-TO-ACTION INTELLIGENCE</span>
           </Link>
 
           <div className="flex-1" />

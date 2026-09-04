@@ -1,31 +1,48 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** Kaboota mark: green gradient tile with two stacked chevrons (from the Kaboota design). */
+/** Kaboota mark: the green parrot, on a transparent background. */
 export function LogoMark({ size = 34, className }: { size?: number; className?: string }) {
-  const icon = Math.round(size / 2);
   return (
-    <span
-      className={cn("grid place-items-center rounded-[11px] shadow-glow", className)}
-      style={{ width: size, height: size, background: "linear-gradient(150deg, var(--brand), var(--brand-dk))" }}
+    <Image
+      src="/logo/kaboota-mark.png"
+      alt=""
+      width={size}
+      height={size}
+      className={cn("flex-shrink-0 select-none", className)}
+      priority
       aria-hidden
-    >
-      <svg width={icon} height={icon} viewBox="0 0 20 20" fill="none">
-        <path d="M3 11.5 10 5l7 6.5" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M3 16 10 9.5l7 6.5" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" opacity=".5" />
-      </svg>
-    </span>
+    />
+  );
+}
+
+/** Kaboota wordmark: parrot + "kaboota.ai". `dark` swaps in the white-text variant for dark surfaces. */
+export function Wordmark({ height = 30, dark, className }: { height?: number; dark?: boolean; className?: string }) {
+  // Source assets are 1684×388.
+  const width = Math.round(height * (1684 / 388));
+  return (
+    <Image
+      src={dark ? "/logo/kaboota-wordmark-light.png" : "/logo/kaboota-wordmark.png"}
+      alt="Kaboota"
+      width={width}
+      height={height}
+      className={cn("h-auto w-auto select-none", className)}
+      style={{ height, width: "auto" }}
+      priority
+    />
   );
 }
 
 export function Logo({ dark, compact }: { dark?: boolean; compact?: boolean }) {
   return (
-    <Link href="/" className="flex flex-shrink-0 items-center gap-[11px]" aria-label="Kaboota home">
-      <LogoMark size={compact ? 28 : 34} />
-      <span className="flex flex-col items-start leading-none">
-        <span className={cn("font-display text-[19px] font-bold tracking-[-0.02em]", dark && "text-white")}>Kaboota</span>
-        {!compact && <span className="mt-[3px] hidden font-mono text-[8.5px] tracking-[.11em] text-ink-3 sm:block">CONVERSATION-TO-ACTION INTELLIGENCE</span>}
-      </span>
+    <Link href="/" className="flex flex-shrink-0 flex-col items-start gap-[4px] leading-none" aria-label="Kaboota home">
+      <Wordmark height={compact ? 26 : 30} dark={dark} />
+      {!compact && (
+        <span className={cn("hidden font-mono text-[8.5px] tracking-[.11em] sm:block", dark ? "text-white/45" : "text-ink-3")}>
+          CONVERSATION-TO-ACTION INTELLIGENCE
+        </span>
+      )}
     </Link>
   );
 }

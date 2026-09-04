@@ -1,3 +1,4 @@
+import { LogoMark } from "@/components/site/logo";
 import type { Metadata } from "next";
 import { featuredPost, topics, morePosts, ctas } from "@/lib/content";
 import { Container, Eyebrow, Card, Btn } from "@/components/site/ui";
@@ -17,7 +18,7 @@ export default function FieldNotesPage() {
           <h1 className="mt-[14px] text-[clamp(32px,4vw,50px)]">{featuredPost.title}</h1>
           <p className="mt-[18px] text-[19px] text-ink-2">{featuredPost.dek}</p>
           <div className="mt-6 flex items-center gap-[11px] border-y border-line py-[14px]">
-            <span className="grid h-[34px] w-[34px] place-items-center rounded-full bg-brand-soft font-mono text-[12px] text-brand-txt">KB</span>
+            <span className="grid h-[34px] w-[34px] place-items-center rounded-full bg-brand-soft"><LogoMark size={22} /></span>
             <span className="text-[14px] font-semibold">The Kaboota team</span>
             <span className="flex-1" />
             <span className="font-mono text-[11px] text-ink-3">SHARE</span>

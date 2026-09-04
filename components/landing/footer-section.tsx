@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedWave } from "./animated-wave";
-import { LogoMark } from "@/components/site/logo";
+import { Wordmark } from "@/components/site/logo";
 import { brand, footerCols } from "@/lib/content";
 
 const contactLinks = [
@@ -24,9 +24,8 @@ export function FooterSection() {
         <div className="pt-16 lg:pt-20 pb-16">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-12 lg:gap-8">
             <div className="col-span-2">
-              <Link href="/" className="inline-flex items-center gap-[10px] mb-6">
-                <LogoMark size={28} className="!shadow-none" />
-                <span className="text-xl font-display font-bold text-white">Kaboota</span>
+              <Link href="/" className="inline-flex items-center mb-6" aria-label="Kaboota home">
+                <Wordmark height={32} dark />
               </Link>
               <p className="font-mono text-[11px] text-white/45 leading-relaxed mb-8">
                 CONVERSATION-TO-ACTION INTELLIGENCE

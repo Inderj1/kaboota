@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { AnimatedGlobe } from "./animated-globe";
-import { hero, kpis } from "@/lib/content";
+import { hero, kpis, ctas } from "@/lib/content";
+import { Btn } from "@/components/site/ui";
+import { Check } from "lucide-react";
 
 // "Every conversation should end in the right action." — one door at a time.
 // Same length on purpose, so the headline never reflows when the word changes.
@@ -31,10 +33,10 @@ export function HeroSection() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-6 pb-4 lg:pt-8 lg:pb-6 w-full">
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-6 items-center">
-          {/* Left: copy */}
-          <div>
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pt-6 pb-4 lg:pt-4 lg:pb-6 w-full">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-10 lg:gap-8 items-center lg:items-start">
+          {/* Left: copy — top-aligned with the globe's visible edge on desktop */}
+          <div className="lg:pt-8">
             <div
               className={`mb-6 transition-all duration-700 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -87,11 +89,35 @@ export function HeroSection() {
             >
               {hero.sub}
             </p>
+
+            <div
+              className={`mt-7 flex flex-wrap items-center gap-3 transition-all duration-700 delay-300 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              <Btn href={ctas.primary.href} size="lg">{ctas.primary.label}</Btn>
+              <Btn href={ctas.secondary.href} variant="secondary" size="lg">{ctas.secondary.label}</Btn>
+            </div>
+
+            <ul
+              className={`mt-7 flex flex-wrap gap-x-6 gap-y-[10px] transition-all duration-700 delay-500 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              {hero.checks.map((c) => (
+                <li key={c} className="flex items-center gap-[8px] whitespace-nowrap text-[14px] font-semibold text-ink-2">
+                  <span className="grid h-[18px] w-[18px] flex-shrink-0 place-items-center rounded-full bg-brand-soft text-brand-txt">
+                    <Check className="h-[11px] w-[11px]" strokeWidth={3} />
+                  </span>
+                  {c}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Right: call-centre globe — channels pulsing on the surface, arcs routing to one pipeline */}
           <div
-            className={`relative mx-auto lg:mx-0 lg:ml-auto w-full max-w-[500px] aspect-[100/112] lg:max-w-[580px] transition-all duration-1000 delay-300 ${
+            className={`relative mx-auto lg:mx-0 lg:ml-auto w-full max-w-[520px] aspect-[100/112] lg:max-w-[640px] transition-all duration-1000 delay-300 ${
               isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
           >
