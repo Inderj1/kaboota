@@ -34,6 +34,8 @@ export const ctas = {
   primary: { label: "Start free pilot", href: "/pilot" },
   secondary: { label: "Book a walkthrough", href: "/walkthrough" },
   listen: { label: "Hear a real call", href: "/walkthrough" },
+  /** Existing customers and demo accounts sign in to the Kaboota app (Firebase Hosting). */
+  signIn: { label: "Sign in", href: "https://app.kaboota.ai/login" },
 };
 
 /* ------------------------------------------------------------------ */
@@ -261,7 +263,7 @@ export const closing = {
 export const footerCols = [
   { h: "Product", items: [["Product", "/product"], ["Solutions", "/solutions"], ["Outcomes", "/outcomes"], ["Plans", "/plans"]] },
   { h: "Company", items: [["About", "/company"], ["Field notes", "/field-notes"], ["Security", "/security"], ["Contact", "/contact"]] },
-  { h: "Get started", items: [["Start free pilot", "/pilot"], ["Book a walkthrough", "/walkthrough"]] },
+  { h: "Get started", items: [["Start free pilot", "/pilot"], ["Book a walkthrough", "/walkthrough"], ["Sign in", "https://app.kaboota.ai/login"]] },
 ];
 
 /* ------------------------------------------------------------------ */

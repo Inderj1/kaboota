@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Wordmark } from "@/components/site/logo";
-import { nav } from "@/lib/content";
+import { nav, ctas } from "@/lib/content";
 
 /** Kaboota header: sticky full-width bar, blurred cream background, 1px bottom rule. */
 export function Navigation() {
@@ -47,7 +47,13 @@ export function Navigation() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-2">
+            <a
+              href={ctas.signIn.href}
+              className="whitespace-nowrap rounded-[11px] border border-line-2 bg-white px-[16px] py-[9px] text-[14px] font-semibold text-ink shadow-1 transition-colors hover:border-ink-3"
+            >
+              {ctas.signIn.label}
+            </a>
             <Button asChild size="sm" className="bg-brand hover:bg-brand-dk text-white font-bold rounded-[11px] shadow-glow px-[18px] py-[10px] h-auto text-[14px]">
               <Link href="/contact">Contact us</Link>
             </Button>
@@ -94,6 +100,12 @@ export function Navigation() {
             }`}
             style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
+            <a
+              href={ctas.signIn.href}
+              className="flex flex-1 items-center justify-center rounded-[11px] border border-line-2 bg-white h-14 text-base font-semibold text-ink shadow-1"
+            >
+              {ctas.signIn.label}
+            </a>
             <Button asChild className="flex-1 bg-brand hover:bg-brand-dk text-white font-bold rounded-[11px] h-14 text-base shadow-glow">
               <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact us</Link>
             </Button>

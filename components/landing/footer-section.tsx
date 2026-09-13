@@ -48,9 +48,15 @@ export function FooterSection() {
                 <ul className="space-y-3">
                   {col.items.map(([label, href]) => (
                     <li key={label}>
-                      <Link href={href} className="text-sm text-white/80 hover:text-mint transition-colors">
-                        {label}
-                      </Link>
+                      {href.startsWith("http") ? (
+                        <a href={href} className="text-sm text-white/80 hover:text-mint transition-colors">
+                          {label}
+                        </a>
+                      ) : (
+                        <Link href={href} className="text-sm text-white/80 hover:text-mint transition-colors">
+                          {label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
